@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>My New Hugo Site</title>
+    <title>大白杨的Blog</title>
     <link>https://atreeyang.github.io/</link>
-    <description>Recent content on My New Hugo Site</description>
+    <description>Recent content on 大白杨的Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 04 Sep 2016 21:45:35 +0800</lastBuildDate>
@@ -19,11 +19,20 @@
 
 &lt;h3 id=&#34;安装hugo&#34;&gt;安装Hugo&lt;/h3&gt;
 
-&lt;p&gt;推荐使用tar方式安装,去&lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;https://github.com/spf13/hugo/releases&lt;/a&gt; 下载一个操作系统对应的版本,解压缩放到/usr/local/bin下.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;* 不要使用brew来安装,得到的不是最新版本 *&lt;/li&gt;
+&lt;li&gt;推荐使用tar方式安装,去[releases page]:&lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;https://github.com/spf13/hugo/releases&lt;/a&gt; 下载mac os对应的版本&lt;/li&gt;
+&lt;li&gt;解压缩放到/usr/local/bin下.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&#34;生成静态html&#34;&gt;生成静态html&lt;/h3&gt;
 
-&lt;p&gt;hugo &amp;ndash;buildDrafts&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;gitpage 目前都是使用https所以在config.toml里面设置baseurl = &amp;ldquo;&lt;a href=&#34;https://atreeyang.github.io/&amp;quot;&#34;&gt;https://atreeyang.github.io/&amp;quot;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;使用命令 hugo &amp;ndash;buildDrafts
+去public目录 提交到你自己的git仓库,访问即可&lt;/p&gt;
 </description>
     </item>
     

@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Hugo 0.16 安装 生成静态文件  &middot; My New Hugo Site</title>
+  <title>Hugo 0.16 安装 生成静态文件  &middot; 大白杨的Blog</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
@@ -17,8 +17,8 @@
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Hugo 0.16 安装 生成静态文件  &middot; My New Hugo Site ">
-<meta property="og:site_name" content="My New Hugo Site"/>
+<meta property="og:title" content="Hugo 0.16 安装 生成静态文件  &middot; 大白杨的Blog ">
+<meta property="og:site_name" content="大白杨的Blog"/>
 <meta property="og:url" content="https://atreeyang.github.io/post/first/" />
 <meta property="og:locale" content="en-us">
 
@@ -51,7 +51,7 @@
     },
     "datePublished": "2016-09-04",
     "description": "",
-    "wordCount":  6 
+    "wordCount":  19 
   }
 </script>
 
@@ -185,7 +185,7 @@
 
   <small>
   &middot; Read in about 1 min
-  &middot; (6 Words)
+  &middot; (19 Words)
 </small>
 
 
@@ -203,11 +203,20 @@
 
 <h3 id="安装hugo">安装Hugo</h3>
 
-<p>推荐使用tar方式安装,去<a href="https://github.com/spf13/hugo/releases">https://github.com/spf13/hugo/releases</a> 下载一个操作系统对应的版本,解压缩放到/usr/local/bin下.</p>
+<ul>
+<li>* 不要使用brew来安装,得到的不是最新版本 *</li>
+<li>推荐使用tar方式安装,去[releases page]:<a href="https://github.com/spf13/hugo/releases">https://github.com/spf13/hugo/releases</a> 下载mac os对应的版本</li>
+<li>解压缩放到/usr/local/bin下.</li>
+</ul>
 
 <h3 id="生成静态html">生成静态html</h3>
 
-<p>hugo &ndash;buildDrafts</p>
+<ul>
+<li>gitpage 目前都是使用https所以在config.toml里面设置baseurl = &ldquo;<a href="https://atreeyang.github.io/&quot;">https://atreeyang.github.io/&quot;</a></li>
+</ul>
+
+<p>使用命令 hugo &ndash;buildDrafts
+去public目录 提交到你自己的git仓库,访问即可</p>
 
 </div>
 
