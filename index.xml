@@ -21,7 +21,7 @@
 
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;不要使用brew来安装,得到的不是最新版本&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;推荐使用tar方式安装,去[releases page]:&lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;https://github.com/spf13/hugo/releases&lt;/a&gt; 下载mac os对应的版本&lt;/li&gt;
+&lt;li&gt;推荐使用tar方式安装,去&lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;releases page&lt;/a&gt; 下载mac os对应的版本&lt;/li&gt;
 &lt;li&gt;解压缩放到/usr/local/bin下.&lt;/li&gt;
 &lt;/ul&gt;
 
