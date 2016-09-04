@@ -25,22 +25,20 @@ This is  a test&lt;/p&gt;
     </item>
     
     <item>
-      <title>first</title>
+      <title>Hugo 0.16 安装 生成静态文件</title>
       <link>https://atreeyang.github.io/post/first/</link>
       <pubDate>Sun, 04 Sep 2016 21:45:35 +0800</pubDate>
       
       <guid>https://atreeyang.github.io/post/first/</guid>
       <description>
 
-&lt;h3 id=&#34;hello-hugo&#34;&gt;Hello Hugo&lt;/h3&gt;
+&lt;h3 id=&#34;安装hugo&#34;&gt;安装Hugo&lt;/h3&gt;
 
-&lt;ul&gt;
-&lt;li&gt;aaa&lt;/li&gt;
-&lt;li&gt;bbb&lt;/li&gt;
-&lt;li&gt;ccc&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;推荐使用tar方式安装,去&lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;https://github.com/spf13/hugo/releases&lt;/a&gt; 下载一个操作系统对应的版本,解压缩放到/usr/local/bin下.&lt;/p&gt;
 
-&lt;p&gt;idddd&lt;/p&gt;
+&lt;h3 id=&#34;生成静态html&#34;&gt;生成静态html&lt;/h3&gt;
+
+&lt;p&gt;hugo &amp;ndash;buildDrafts&lt;/p&gt;
 </description>
     </item>
     
