@@ -27,9 +27,19 @@
         <link rel="canonical" href="https://atreeyang.github.io/" />
         <link rel="alternate" type="application/rss+xml" title="RSS" href="https://atreeyang.github.io/index.xml">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://atreeyang.github.io/css/main.css"/>
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700"/>
+        <link rel="stylesheet" type="text/css" href="https://atreeyang.github.io/css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="https://atreeyang.github.io/css/my.css"/>
         <script src="https://atreeyang.github.io/js/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/atom-one-light.min.css"/>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+        <script>
+            hljs.configure({
+                tabReplace: '    '
+            })
+            hljs.initHighlightingOnLoad();
+        </script>
+
     </head>
 
 <body>
@@ -43,6 +53,27 @@
     </header>
 <main class="content" role="main">
 	<div class="container">
+	
+		<article class="li performance">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://atreeyang.github.io/performance/jmc/">Java性能分析工具JMC使用教程</a></h3>
+        <p class="post-time"><time datetime="2016-09-06T15:09:16&#43;08:00">September 6, 2016</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>JMC java mission control是java性能分析利器.从实践出发,学习如何使用. 本文从JMC Tutorial英文版中提炼出来,涵盖了文中所有重要的topic.请点击下载所有源代码. Install JMC 从java7自带JMC,示例使用java 8环境. 可以执行JAVA_HOME/bin/jmc来启动JMC. 也可以作为eclipse插件安装,从略. JFR使用 Java Flight Recorder (JFR)顾名思义,就是java运行情况的黑匣子. 先启动Java进程,然后使用JFR记录程序运行情况.需要在启动命令行加参数 -XX:+UnlockCommercialFeatures -XX:+FlightRecorder 解压源代码,在目录下10_Console_LoadAndDeadlock/bin 启动:java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder LoadAndDeadlock 把jmc关联到java进程 点击启动飞行记录,点击保存. 一分钟之后可以看到应用程序的统计采样. Hot Methods 目标:使用JMC找到进程中的Hot Spot,也就是耗费时间最多的代码段. 使用JMC代开文件02_JFR_HotMethods/hotmethods.jfr.分析这个JFR记录文件. 可以看到这个耗费最多执行时间点的方法调用 public class Initiator { private Collection&lt;Integer&gt; collection; public Initiator() { collection = new LinkedList&lt;Integer&gt;(); } // Hint: This creates a list of unique elements! public void initiate(int seed) { collection.clear(); for (int i = 1; i &lt; 10000; i++) { if ((i % seed) != 0) collection.add(i); } } protected Collection&lt;Integer&gt; getCollection() { return collection; } public int countIntersection(Initiator other) { int count = 0; for (Integer i : collection) { if (other.getCollection().contains(i)) { count++; } } return count; } } 这个代码的问题在于countIntersection方法中是对两个LinkedList做遍历,和元素个数相关10000个元素的平方太大了,改成Hashset存储会修复这个问题.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+            	&nbsp;&nbsp;<i class="fa fa-tag"></i>
+            	performance
+            
+        </span>
+    </footer>
+</article>
 	
 		<article class="li hugo">
     <header class="post-header">

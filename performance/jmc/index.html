@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="atreeyang">
+  
+	
+        <meta property="og:site_name" content="yang&#39;s Blog">
+        <meta property="og:title" content="yang&#39;s Blog">
+        <meta property="og:url" content="https://atreeyang.github.io/performance/jmc/">
+        <meta property="og:description" content="java 后端开发">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="atreeyang" />
+        <meta property="og:article:published_time" content="2016-09-06T15:09:16&#43;08:00" />
+    
+        <meta name="generator" content="Hugo 0.16" />
+        <title>Java性能分析工具JMC使用教程 &middot; yang&#39;s Blog</title>
+        <link rel="canonical" href="https://atreeyang.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700"/>
+        <link rel="stylesheet" type="text/css" href="https://atreeyang.github.io/css/main.css"/>
+        <link rel="stylesheet" type="text/css" href="https://atreeyang.github.io/css/my.css"/>
+        <script src="https://atreeyang.github.io/js/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/atom-one-light.min.css"/>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+        <script>
+            hljs.configure({
+                tabReplace: '    '
+            })
+            hljs.initHighlightingOnLoad();
+        </script>
+
+    </head>
+
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://atreeyang.github.io/" alt="yang&#39;s Blog"><h1 class="blog-title heading">yang&#39;s Blog</h1></a>
+            <p class="blog-description">java 后端开发</p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="performance">
+	<header class="post-header">
+        <h3 class="p-post-title">Java性能分析工具JMC使用教程</h3>
+    </header>
+
+    <section class="post-content">
+        
+
+<p>JMC java mission control是java性能分析利器.从实践出发,学习如何使用.<br />
+本文从<a href="http://hirt.se/downloads/oracle/jmc_tutorial.zip" title="JMC tutorial">JMC Tutorial</a>英文版中提炼出来,涵盖了文中所有重要的topic.请点击下载所有源代码.</p>
+
+<h4 id="install-jmc">Install JMC</h4>
+
+<p>从java7自带JMC,示例使用java 8环境.
+可以执行JAVA_HOME/bin/jmc来启动JMC.</p>
+
+<p>也可以作为eclipse插件安装,从略.</p>
+
+<h4 id="jfr使用">JFR使用</h4>
+
+<p>Java Flight Recorder (JFR)顾名思义,就是java运行情况的黑匣子.
+先启动Java进程,然后使用JFR记录程序运行情况.需要在启动命令行加参数 -XX:+UnlockCommercialFeatures -XX:+FlightRecorder</p>
+
+<p>解压源代码,在目录下10_Console_LoadAndDeadlock/bin 启动:java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder LoadAndDeadlock</p>
+
+<p>把jmc关联到java进程</p>
+
+<p><img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473157444811.png-blg" alt="jmc截图" /></p>
+
+<p>点击启动飞行记录,点击保存.</p>
+
+<p><img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473158342484.png-blg" alt="飞行记录" /></p>
+
+<p>一分钟之后可以看到应用程序的统计采样.</p>
+
+<p><img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473159183052.png-blg" alt="" /></p>
+
+<h4 id="hot-methods">Hot Methods</h4>
+
+<p>目标:使用JMC找到进程中的Hot Spot,也就是耗费时间最多的代码段.</p>
+
+<p>使用JMC代开文件02_JFR_HotMethods/hotmethods.jfr.分析这个JFR记录文件.</p>
+
+<p><img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473160411461.png-blg" alt="" /></p>
+
+<p>可以看到这个耗费最多执行时间点的方法调用</p>
+
+<pre><code class="language-java">public class Initiator {
+	private Collection&lt;Integer&gt; collection;
+
+	public Initiator() {
+		collection = new LinkedList&lt;Integer&gt;();
+	}
+
+	// Hint: This creates a list of unique elements!
+	public void initiate(int seed) {
+		collection.clear();
+		for (int i = 1; i &lt; 10000; i++) {
+			if ((i % seed) != 0)
+				collection.add(i);
+		}
+	}
+
+	protected Collection&lt;Integer&gt; getCollection() {
+		return collection;
+	}
+
+	public int countIntersection(Initiator other) {
+		int count = 0;
+		for (Integer i : collection) {
+			if (other.getCollection().contains(i)) {
+				count++;
+			}
+		}
+		return count;
+	}
+}
+</code></pre>
+
+<p>这个代码的问题在于countIntersection方法中是对两个LinkedList做遍历,和元素个数相关10000个元素的平方太大了,改成Hashset存储会修复这个问题.</p>
+
+<h4 id="latencies">Latencies</h4>
+
+<p>Latencies主要用来监控线程间阻塞等待:打开03_JFR_Latencies/latency.jfr,切换到Events-&gt;Graph的tab.我们看到粉红色的事件类型特别多.</p>
+
+<p><img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473172214976.png-blg" alt="" />
+提示信息是阻塞在Logger.log(String)这个方法上.</p>
+
+<pre><code class="language-java">public class Logger {
+	private static Logger myInstance = new Logger();
+	
+	public static Logger getLogger() {
+		return myInstance;
+	}
+
+
+	public synchronized void log(String text) {
+		LogEvent event = new LogEvent(CustomEventLatencies.LOG_EVENT_TOKEN, text);
+		event.begin();
+		// Do logging here
+		// Write the text to a database or similar...
+		try {
+			// Simulate that this takes a little while.
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// Don't care.
+		}
+		event.end();
+		event.commit();
+	}
+}
+</code></pre>
+
+<p>可以看到是log方法,如果没有竞争资源的可以去掉synchronized关键字即可.
+顺便看看fix之后理想的状态是这样的:</p>
+
+<p><img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473172642308.png-blg" alt="" /></p>
+
+<p>Note:在线程的tab争用的tab下面也提示了是哪个类带来的瓶颈.
+<img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473173413999.png-blg" alt="" /></p>
+
+<h4 id="gc垃圾回收">GC垃圾回收</h4>
+
+<p>GC垃圾回收打开allocator.jfr在04_JFR_GC目录下:
+<img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473176114619.png-blg" alt="" />
+可以看到很多的垃圾回收的动作,虽然都是defnew.新生代的垃圾回收,过于频繁也是问题.</p>
+
+<p><img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473176301789.png-blg" alt="" />
+切换到allcations看到对象是Integer,stack trace中看到分配的代码栈,是在Allocator.main-&gt;Allocator.go-&gt;Integer.valueOf方法中.</p>
+
+<pre><code class="language-java">public class Allocator {
+	// Integer -&gt; MyAlloc
+	private HashMap&lt;Integer, MyAlloc&gt; map = new HashMap&lt;Integer, MyAlloc&gt;();//FIX 使用int
+	
+	private static class MyAlloc {
+		private int id;
+		
+		private MyAlloc(int id) {
+			this.id = id;
+		}
+		
+		private int getId() {
+			return id;
+		}
+	}
+	
+	public static void main(String[] args) {
+		new Allocator().go();
+	}
+
+	private void go() {
+		alloc(10000);
+		long yieldCounter = 0;
+		while(true) {
+			Collection&lt;MyAlloc&gt; myAllocSet = map.values();
+			for (MyAlloc c : myAllocSet ) {
+				if (!map.containsKey(c.getId())) //拆装箱
+					System.out.println(&quot;Now this is strange!&quot;);
+				if (++yieldCounter % 1000 == 0)
+					Thread.yield();
+			}
+		}
+	}
+
+	private void alloc(int count) {
+		for (int i = 0; i &lt; count; i++) {
+			map.put(i, new MyAlloc(i));
+		}
+	}
+}
+</code></pre>
+
+<p>自动拆装箱生成了太多的无用Integer对象,Fix方案也很简单,使用原始类型int代替Integer.</p>
+
+<h4 id="exception">Exception</h4>
+
+<p>Exception对于jvm来说比较耗京能,如果抛出太多异常也是需要关注的.
+打开exceptions.jfr 在 06_JFR_Exceptions
+<img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473180395332.png-blg" alt="" />
+从上图可以看到应用抛出的异常.
+<strong>小技巧</strong>操作集:在上图中把ScaryException上点击右键加入到操作集合,想知道具体异常在什么时间抛出的去 事件-&gt;日志 tab.选择只显示操作集.可以看到异常抛出的时间.
+<img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473180737786.png-blg" alt="" /></p>
+
+<h4 id="mbean-browser">Mbean browser</h4>
+
+<p>Mbean的用处就不介绍了.在JMC左侧选取进程,然后选取Mbean 服务器.
+<img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473211154113.png-blg" alt="" />
+会出现当前jvm进程的概览.有cpu内存等指标的dashboard,你可以在dashboard中添加自己关注的指标图表.</p>
+
+<p>我们主要来看Mbean的tab.这里可以选取你关心的指标,可以看到老年代的垃圾收集器是PS MarkSweep.
+<img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473211386031.png-blg" alt="" /></p>
+
+<p>可以查看当前的Thread相关的信息,比如当前的线程个数.
+<img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473212723314.png-blg" alt="" /></p>
+
+<p>可以在诊断命令tab中执行想要执行的命令,比如获取线程的执行栈.</p>
+
+<p><img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473212907548.png-blg" alt="" /></p>
+
+<p>线程tab,可以检测死锁情况.点击死锁检测checkbox,看到Thread3 和Thread4是死锁状态.</p>
+
+<p><img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473213058575.png-blg" alt="" /></p>
+
+<p>触发器一栏可以设置知己关心的报警指标和条件.比如CPU使用率过高.</p>
+
+<p><img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473213322040.png-blg" alt="" /></p>
+
+<h4 id="jcmd使用">JCMD使用</h4>
+
+<p>先运行13_Memleak_Leak/bin下面执行:(参考launcers/Leak.launch)</p>
+
+<pre><code>java -Djava.net.preferIPv4Stack=true -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -Xmx128m -Xms128m Leak 2 1
+</code></pre>
+
+<p>运行jcm命令,看到Leak的进程号是87728. 使用jcmd 87728 help命令查看可以使用的操作命令.
+<img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473216865333.png-blg" alt="" />
+使用jcmd 87728 GC.class_histogram命令得到java堆的使用情况的统计数据.
+<img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473216991359.png-blg" alt="" />
+过几分在运行一次得到当前的的堆的统计情况,可以看到Leak$DemoObject狂涨.
+<img src="http://od2p0xmzq.bkt.clouddn.com/mkd/1473217136572.png-blg" alt="" /></p>
+
+<p>也可以使用jcm来启动一次JFR记录.并把记录文件dump出来</p>
+
+<pre><code class="language-sh">jcmd 87728 JFR.start
+JFR.dump recording=1 filename=/tmp/leak.jfr
+jcmd 87728 JFR.stop recording=1
+</code></pre>
+
+<p>以上三个命令分别是启动,dump,停止JFR.然后可以打开/tmp/leak.jfr文件来查看JFR记录.</p>
+
+<h4 id="其他">其他</h4>
+
+<ul>
+<li>weblogic插件因为不常用略过了,感兴趣的同学可以查看原文.</li>
+<li>Dtrace 是在Solaris上才能使用,本身对Dtrace背景要求比较高,可以使用Dtrace自带的各种探针.JMC默认是没有Dtrace插件的,先安装.在帮助菜单-&gt;安装新软件,选择Dtrace相关的插件.</li>
+</ul>
+
+<h4 id="参考">参考</h4>
+
+<p><a href="http://hirt.se/downloads/oracle/jmc_tutorial.zip" title="JMC tutorial">JMC tutorial</a></p>
+
+    </section>
+
+    <hr>
+
+    <footer class="post-footer">
+        <section class="f-1">
+            
+            <section class="author">
+                <p>Words by atreeyang</p>
+            </section>
+            
+            
+            <p class="f-post-time"><time datetime="2016-09-06T15:09:16&#43;08:00">September 6, 2016</time></p>
+        </section>
+                        
+        <section class="f-2">
+            <section class="share">
+                <span>Share:
+                <a class="icon-twitter" href="http://twitter.com/share?text=Java%e6%80%a7%e8%83%bd%e5%88%86%e6%9e%90%e5%b7%a5%e5%85%b7JMC%e4%bd%bf%e7%94%a8%e6%95%99%e7%a8%8b&url=https%3a%2f%2fatreeyang.github.io%2fperformance%2fjmc%2f"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fatreeyang.github.io%2fperformance%2fjmc%2f"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https%3a%2f%2fatreeyang.github.io%2fperformance%2fjmc%2f"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+                </span>
+            </section>
+
+            
+            	<span class="f-post-tags"><i class="fa fa-tag"></i>
+            	performance
+            	</span>
+            
+        </section>
+                        
+    </footer>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+        <div class="container">
+            <a href="https://atreeyang.github.io/index.xml" title="Get the RSS feed"><span class="tooltip"><i class="fa fa-rss"></i></span></a>
+            <section>&copy; <a href="https://atreeyang.github.io/">atreeyang</a> 2015 | All rights reserved</section>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://atreeyang.github.io/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+
+
+
+</body>
+</html>

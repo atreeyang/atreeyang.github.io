@@ -17,15 +17,15 @@
 	
         <meta property="og:site_name" content="yang&#39;s Blog">
         <meta property="og:title" content="yang&#39;s Blog">
-        <meta property="og:url" content="https://atreeyang.github.io/tags/hugo/">
+        <meta property="og:url" content="https://atreeyang.github.io/tags/performance/">
         <meta property="og:description" content="java 后端开发">
     
         <meta property="og:type" content="website" />
     
         <meta name="generator" content="Hugo 0.16" />
-        <title>Hugo &middot; yang&#39;s Blog</title>
+        <title>Performance &middot; yang&#39;s Blog</title>
         <link rel="canonical" href="https://atreeyang.github.io/" />
-        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://atreeyang.github.io/tags/hugo/index.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://atreeyang.github.io/tags/performance/index.xml">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700"/>
         <link rel="stylesheet" type="text/css" href="https://atreeyang.github.io/css/main.css"/>
@@ -54,14 +54,14 @@
 <main class="content" role="main">
 	<div class="container">
 	
-		<article class="li hugo">
+		<article class="li performance">
     <header class="post-header">
-        <h3 class="post-title"><a href="https://atreeyang.github.io/hugo/">Mac下Hugo的安装和使用</a></h3>
-        <p class="post-time"><time datetime="2016-03-08T21:07:13&#43;01:00">March 8, 2016</time></p>
+        <h3 class="post-title"><a href="https://atreeyang.github.io/performance/jmc/">Java性能分析工具JMC使用教程</a></h3>
+        <p class="post-time"><time datetime="2016-09-06T15:09:16&#43;08:00">September 6, 2016</time></p>
     </header>
     
     <section class="post-excerpt">
-        <p>安装Hugo 不要使用brew来安装,得到的不是最新版本 推荐使用tar方式安装,去releases page 下载mac os对应的版本 解压缩放到/usr/local/bin下. 生成静态html git page 目前都是使用https所以在config.toml里面设置baseurl = “https://atreeyang.github.io/&quot; 使用命令 hugo –buildDrafts 去public目录 提交到你自己的git仓库,访问即可</p>
+        <p>JMC java mission control是java性能分析利器.从实践出发,学习如何使用. 本文从JMC Tutorial英文版中提炼出来,涵盖了文中所有重要的topic.请点击下载所有源代码. Install JMC 从java7自带JMC,示例使用java 8环境. 可以执行JAVA_HOME/bin/jmc来启动JMC. 也可以作为eclipse插件安装,从略. JFR使用 Java Flight Recorder (JFR)顾名思义,就是java运行情况的黑匣子. 先启动Java进程,然后使用JFR记录程序运行情况.需要在启动命令行加参数 -XX:+UnlockCommercialFeatures -XX:+FlightRecorder 解压源代码,在目录下10_Console_LoadAndDeadlock/bin 启动:java -XX:+UnlockCommercialFeatures -XX:+FlightRecorder LoadAndDeadlock 把jmc关联到java进程 点击启动飞行记录,点击保存. 一分钟之后可以看到应用程序的统计采样. Hot Methods 目标:使用JMC找到进程中的Hot Spot,也就是耗费时间最多的代码段. 使用JMC代开文件02_JFR_HotMethods/hotmethods.jfr.分析这个JFR记录文件. 可以看到这个耗费最多执行时间点的方法调用 public class Initiator { private Collection&lt;Integer&gt; collection; public Initiator() { collection = new LinkedList&lt;Integer&gt;(); } // Hint: This creates a list of unique elements! public void initiate(int seed) { collection.clear(); for (int i = 1; i &lt; 10000; i++) { if ((i % seed) != 0) collection.add(i); } } protected Collection&lt;Integer&gt; getCollection() { return collection; } public int countIntersection(Initiator other) { int count = 0; for (Integer i : collection) { if (other.getCollection().contains(i)) { count++; } } return count; } } 这个代码的问题在于countIntersection方法中是对两个LinkedList做遍历,和元素个数相关10000个元素的平方太大了,改成Hashset存储会修复这个问题.</p>
     </section>
 
     <footer class="post-footer">
@@ -69,7 +69,7 @@
             
             
             	&nbsp;&nbsp;<i class="fa fa-tag"></i>
-            	hugo
+            	performance
             
         </span>
     </footer>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>yang&#39;s Blog</title>
-    <link>https://atreeyang.github.io/</link>
-    <description>Recent content on yang&#39;s Blog</description>
+    <title>Performance on yang&#39;s Blog</title>
+    <link>https://atreeyang.github.io/tags/performance/</link>
+    <description>Recent content in Performance on yang&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 06 Sep 2016 15:09:16 +0800</lastBuildDate>
-    <atom:link href="https://atreeyang.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://atreeyang.github.io/tags/performance/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Java性能分析工具JMC使用教程</title>
@@ -249,32 +249,6 @@ jcmd 87728 JFR.stop recording=1
 &lt;h4 id=&#34;参考&#34;&gt;参考&lt;/h4&gt;
 
 &lt;p&gt;&lt;a href=&#34;http://hirt.se/downloads/oracle/jmc_tutorial.zip&#34; title=&#34;JMC tutorial&#34;&gt;JMC tutorial&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Mac下Hugo的安装和使用</title>
-      <link>https://atreeyang.github.io/hugo/</link>
-      <pubDate>Tue, 08 Mar 2016 21:07:13 +0100</pubDate>
-      
-      <guid>https://atreeyang.github.io/hugo/</guid>
-      <description>
-
-&lt;h4 id=&#34;安装hugo&#34;&gt;安装Hugo&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;不要&lt;/strong&gt;使用brew来安装,得到的不是最新版本&lt;/li&gt;
-&lt;li&gt;推荐使用tar方式安装,去&lt;a href=&#34;https://github.com/spf13/hugo/releases&#34;&gt;releases page&lt;/a&gt; 下载mac os对应的版本&lt;/li&gt;
-&lt;li&gt;解压缩放到/usr/local/bin下.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&#34;生成静态html&#34;&gt;生成静态html&lt;/h4&gt;
-
-&lt;ul&gt;
-&lt;li&gt;git page 目前都是使用https所以在config.toml里面设置baseurl = “&lt;a href=&#34;https://atreeyang.github.io/&amp;quot;&#34;&gt;https://atreeyang.github.io/&amp;quot;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;使用命令 hugo –buildDrafts&lt;/li&gt;
-&lt;li&gt;去public目录 提交到你自己的git仓库,访问即可&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     
